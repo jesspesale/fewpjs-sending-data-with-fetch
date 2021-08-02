@@ -1,7 +1,5 @@
-// Add your code here
 
 function submitData(name, email) {
-
     const configObj = {
         method: "POST",
         headers: {
@@ -13,7 +11,19 @@ function submitData(name, email) {
             email
         })
     }
-    fetch("http://localhost:3000/users", configObj)
+
+    return fetch("http://localhost:3000/users", configObj)
         .then(result => result.json())
-        .then(funct())
+        .then(jsonObj => appendDom(jsonObj.id))
+        .catch(function(error) {
+            appendDom(error.message)
+        })
 }
+
+function appendDom(object) {
+    const body = document.querySelector("body")
+    body.innerHTML = object
+}
+
+
+
